@@ -16,7 +16,7 @@ export default function KaraokeApp() {
             return;
         }
         if (!isStudent && (!hoursNonStudent || parseFloat(hoursNonStudent) <= 0)) {
-            alert("กรุณากรอกจำนวนชั่วโมงในช่องที่ถูกต้อง");
+            alert("กรุณากรอกจำนวนชั่วโมง");
             return;
         }
         
@@ -29,7 +29,7 @@ export default function KaraokeApp() {
         <div className="border p-4 w-96 mt-2 ml-2 border-black">
             <table className="border-collapse w-full mt-2" style={{ border: "2px solid black" }}>
                     <tr>
-                        <th colSpan="2" className="border border-black p-2 text-center">ร้านคาราโอเกะ</th>
+                        ร้านคาราโอเกะ
                     </tr>
                 
             <table className="border-collapse w-full mt-2" style={{ border: "2px solid black" }}>
