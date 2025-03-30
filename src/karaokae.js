@@ -1,108 +1,102 @@
 import { useState } from "react";
 
-export default function KaraokeApp() {
-    const [hoursNonStudent, setHoursNonStudent] = useState("");
-    const [hoursStudent, setHoursStudent] = useState("");
-    const [isStudent, setIsStudent] = useState(false);
-    const [totalCost, setTotalCost] = useState("");
+export default function KaraokeCalculator() {
+    const [generalHours, setGeneralHours] = useState("");
+    const [studentHours, setStudentHours] = useState("");
+    const [hasStudentID, setHasStudentID] = useState(false);
+    const [finalAmount, setFinalAmount] = useState("");
 
-    const calculateCost = () => {
-        if (!hoursNonStudent && !hoursStudent) {
-            alert("กรุณากรอกจำนวนชั่วโมง");
-            return;
-        }
-        if (isStudent && (!hoursStudent || parseFloat(hoursStudent) <= 0)) {
-            alert("โปรดกรอกจำนวนชั่วโมงในช่องที่ตรงกับประเภทสมาชิกของคุณ");
-            return;
-        }
-        if (!isStudent && (!hoursNonStudent || parseFloat(hoursNonStudent) <= 0)) {
-            alert("กรุณากรอกจำนวนชั่วโมง");
+    const computeTotal = () => {
+        if (!generalHours && !studentHours) {
+            alert("กรุณากรอกจำนวนชั่วโมงที่ต้องการใช้บริการ");
             return;
         }
         
-        const parsedHours = parseFloat(isStudent ? hoursStudent : hoursNonStudent);
-        const rate = isStudent ? 80 : 120;
-        setTotalCost((parsedHours * rate).toFixed(2) + " บาท");
+        if (!hasStudentID && (!generalHours || parseFloat(generalHours) <= 0)) {
+            alert("กรุณากรอกจำนวนชั่วโมงให้ถูกต้อง");
+            return;
+        }
+        
+        const hours = parseFloat(hasStudentID ? studentHours : generalHours);
+        const ratePerHour = hasStudentID ? 80 : 120;
+        setFinalAmount((hours * ratePerHour).toFixed(0));
     };
 
     return (
         <div className="border p-4 w-96 mt-2 ml-2 border-black">
             <table className="border-collapse w-full mt-2" style={{ border: "2px solid black" }}>
-                    <tr>
-                        ร้านคาราโอเกะ
-                    </tr>
-                
+                <tr>
+                    <td>ร้านคาราโอเกะ</td>
+                </tr>
+            </table>
+            
             <table className="table1" style={{ border: "2px solid black" }}>
-                
                 <tbody>
                     <tr>
-                        <td colSpan="2" >
+                        <td colSpan="2">
                             <input 
                                 type="radio" 
-                                name="student" 
-                                checked={!isStudent} 
-                                onChange={() => setIsStudent(false)} 
-                            /> ไม่มีบัตรนักศึกษา
+                                name="membership" 
+                                checked={!hasStudentID} 
+                                onChange={() => setHasStudentID(false)} 
+                            /> บุคคลทั่วไป
                         </td>
                     </tr>
                     <tr>
-                        <td  >
-                            ชั่วโมงละ 120 บาท
-                        </td>
-                        <td >
+                        <td>ชั่วโมงละ 120 บาท</td>
+                        <td>
                             <input 
                                 type="number" 
                                 className="border w-16 ml-2" 
-                                value={hoursNonStudent} 
-                                onChange={(e) => setHoursNonStudent(e.target.value)}
+                                value={generalHours} 
+                                onChange={(e) => setGeneralHours(e.target.value)}
                             /> ชั่วโมง
                         </td>
                     </tr>
                     <tr>
-                        <td >
+                        <td>
                             <input 
                                 type="radio" 
-                                name="student" 
-                                checked={isStudent} 
-                                onChange={() => setIsStudent(true)} 
-                            /> มีบัตรนักศึกษา
+                                name="membership" 
+                                checked={hasStudentID} 
+                                onChange={() => setHasStudentID(true)} 
+                            /> นักศึกษา
                         </td>
                     </tr>
                     <tr>
-                        <td >
-                            ชั่วโมงละ 80 บาท
-                        </td>
-                        <td >
+                        <td>ชั่วโมงละ 80 บาท</td>
+                        <td>
                             <input 
                                 type="number" 
                                 className="border w-16 ml-2" 
-                                value={hoursStudent} 
-                                onChange={(e) => setHoursStudent(e.target.value)}
+                                value={studentHours} 
+                                onChange={(e) => setStudentHours(e.target.value)}
                             /> ชั่วโมง
                         </td>
                     </tr>
                 </tbody>
             </table>
-            </table>
-            <div className="mt-2 border p-2 border-black text-center">
+            
             <div className="mt-2 border p-2 border-black text-center">
                 <button 
                     className="border px-4 py-1 bg-blue-500 text-white mt-2" 
-                    onClick={calculateCost}
+                    onClick={computeTotal}
                 >
-                    คิดเงิน
+                    คำนวณราคา
                 </button>
             </div>
-                รวมเป็นเงินทั้งสิ้น=
+            
+            <div className="mt-2 border p-2 border-black text-center">
+                รวมเป็นเงินทั้งหมด =
                 <input 
                     type="text" 
                     className="border w-24 bg-gray-100 ml-2" 
-                    value={totalCost} 
+                    value={finalAmount} 
                     readOnly 
-                /> บาท
+                    
+                />
+                บาท
             </div>
-          
         </div>
     );
-    
 }
