@@ -32,7 +32,7 @@ export default function KaraokeApp() {
                         ร้านคาราโอเกะ
                     </tr>
                 
-            <table className="border-collapse w-full mt-2" style={{ border: "2px solid black" }}>
+            <table className="table1" style={{ border: "2px solid black" }}>
                 
                 <tbody>
                     <tr>
@@ -93,7 +93,7 @@ export default function KaraokeApp() {
                     คิดเงิน
                 </button>
             </div>
-                รวมเป็นเงินทั้งสิ้น:
+                รวมเป็นเงินทั้งสิ้น=
                 <input 
                     type="text" 
                     className="border w-24 bg-gray-100 ml-2" 
@@ -104,4 +104,5 @@ export default function KaraokeApp() {
           
         </div>
     );
+    
 }

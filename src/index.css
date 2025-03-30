@@ -11,3 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+table {
+  margin-top: 10px;  /* ระยะห่างด้านบน 10px */
+  margin-left: 10px; /* ระยะห่างด้านซ้าย 10px */
+}
