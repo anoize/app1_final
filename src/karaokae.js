@@ -23,7 +23,7 @@ export default function KaraokeCalculator() {
     };
 
     return (
-        <div className="border p-4 w-96 mt-2 ml-2 border-black">
+        <div className="border p-4 w-96 mt-2 ml-2 border-black" style={{ border: "2px solid black" }}>
             <table className="border-collapse w-full mt-2" style={{ border: "2px solid black" }}>
                 <tr>
                     <td>ร้านคาราโอเกะ</td>
